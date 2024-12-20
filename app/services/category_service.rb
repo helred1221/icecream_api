@@ -1,9 +1,9 @@
-class CategoryService
-    class << self
+    class CategoryService
+        class << self
 
-        def save(category)
-            category.save
+            def save(category)
+                category.save
+            end
+
         end
-
     end
-end
