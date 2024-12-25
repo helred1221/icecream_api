@@ -1,7 +1,4 @@
-class AddressesController < ApplicationController
-    module Api
-        module V1
-          class AddressesController < ApplicationController
+class Api::V1::AddressesController < ApplicationController
             before_action :set_address, only: %i[show update destroy]
       
             def index
@@ -47,8 +44,4 @@ class AddressesController < ApplicationController
             def set_address
               @address = AddressFilter.find_by_id(params[:id])
             end
-      
-          end
-        end
-      end
 end

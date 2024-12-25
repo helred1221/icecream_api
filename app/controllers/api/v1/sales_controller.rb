@@ -1,7 +1,4 @@
-class SalesController < ApplicationController
-    module Api
-        module V1
-          class SalesController < ApplicationController
+class Api::V1::SalesController < ApplicationController
             before_action :set_sale, only: %i[show update destroy]
       
             def index
@@ -47,8 +44,4 @@ class SalesController < ApplicationController
             def set_sale
               @sale = SaleFilter.find_by_id(params[:id])
             end
-      
-          end
-        end
-      end
 end

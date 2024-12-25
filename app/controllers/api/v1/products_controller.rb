@@ -1,7 +1,4 @@
-class ProductsController < ApplicationController
-        module Api
-            module V1
-              class ProductsController < ApplicationController
+class Api::V1::ProductsController < ApplicationController
                 before_action :set_product, only: %i[show update destroy]
           
                 def index
@@ -47,9 +44,4 @@ class ProductsController < ApplicationController
                 def set_product
                   @product = ProductFilter.find_by_id(params[:id])
                 end
-          
-              end
-            end
-          end
-    
 end

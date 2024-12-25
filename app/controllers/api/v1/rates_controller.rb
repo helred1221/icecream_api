@@ -1,7 +1,4 @@
-class RatesController < ApplicationController
-    module Api
-        module V1
-          class RatesController < ApplicationController
+class Api::V1::RatesController < ApplicationController
             before_action :set_rate, only: %i[show update destroy]
       
             def index
@@ -47,8 +44,4 @@ class RatesController < ApplicationController
             def set_rate
               @rate = RateFilter.find_by_id(params[:id])
             end
-      
-          end
-        end
-      end
 end
