@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
                 def product_params
                   params
                     .require(:product)
-                    .permit(:street, :house_number, :neighborhood, :city, :zip_code)
+                    .permit(:tittle, :description, :brand, :value, :size, :quantity, :category)
                 end
           
                 def set_product
