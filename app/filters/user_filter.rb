@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-# Product Filter class
-class ProductFilter
+# User Filter class
+class UserFilter
   class << self
     def retrieve_all
-      Product.all
+      User.all
     end
 
     def find_by_id(id)
-      Product.find(id)
+      User.find(id)
     end
   end
 end
