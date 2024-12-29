@@ -1,9 +1,10 @@
-    class CategoryService
-        class << self
+# frozen_string_literal: true
 
-            def save(category)
-                category.save
-            end
-
-        end
+# Category Service Class
+class CategoryService
+  class << self
+    def save(category)
+      category.save
     end
+  end
+end
