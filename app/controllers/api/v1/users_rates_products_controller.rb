@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    # This is a Users_Rates_Products Controller class
+    # This is a user_rate_products Controller class
     class UsersRatesProductsController < ApplicationController
       before_action :set_user_rate_products, only: %i[show update destroy]
 
@@ -16,12 +16,12 @@ module Api
       end
 
       def create
-        users_rates_products = UsersRatesProducts.new(user_rate_products_params)
+        user_rate_products = UsersRatesProducts.new(user_rate_products_params)
 
-        if users_rates_products.save
-          render json: users_rates_products, status: :created
+        if user_rate_products.save
+          render json: user_rate_products, status: :created
         else
-          render json: { errors: users_rates_products.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: user_rate_products.errors.full_message }, status: :unprocessable_entity
         end
       end
 
@@ -29,7 +29,7 @@ module Api
         if @user_rate_products.update(user_rate_products_params)
           render json: @user_rate_products, status: :ok
         else
-          render json: { errors: users_rates_products.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: user_rate_products.errors.full_message }, status: :unprocessable_entity
         end
       end
 
@@ -42,7 +42,7 @@ module Api
 
       def user_rate_products_params
         params
-          .require(:users_rates_products)
+          .require(:user_rate_products)
           .permit(:user, :product, :rate)
       end
 
