@@ -18,23 +18,23 @@ module Api
       def create
         user = User.new(user_params)
 
-        if user.save
+        if UserService.save(user)
           render json: user, status: :created
         else
-          render json: { errors: user.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       def update
-        if @user.update(user_params)
+        if UserService.update(@user, user_params)
           render json: @user, status: :ok
         else
-          render json: { errors: user.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        @user.destroy
+        UserService.destroy(@user)
         head :no_content
       end
 
@@ -48,6 +48,7 @@ module Api
 
       def set_user
         @user = UserFilter.find_by_id(params[:id])
+        render json: { errors: 'User not found' }, status: :not_found unless @user
       end
     end
   end

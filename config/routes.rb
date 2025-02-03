@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  namespace :api do 
+  namespace :api do
     namespace :v1 do
       resources :categories
       resources :rates
@@ -9,6 +9,6 @@ Rails.application.routes.draw do
       resources :products
       resources :user_rate_products
       resources :sale_products
-    end 
+    end
   end
 end
