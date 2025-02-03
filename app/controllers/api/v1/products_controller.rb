@@ -21,7 +21,7 @@ module Api
         if product.save
           render json: product, status: :created
         else
-          render json: { errors: product.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: product.errors.full_messages }, status: :unprocessable_entity
         end
       end
 

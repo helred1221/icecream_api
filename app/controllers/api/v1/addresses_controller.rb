@@ -21,7 +21,7 @@ module Api
         if address.save
           render json: address, status: :created
         else
-          render json: { errors: address.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: address.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
