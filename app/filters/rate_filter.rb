@@ -8,7 +8,7 @@ class RateFilter
     end
 
     def find_by_id(id)
-      Rate.find(id)
+      Rate.find_by(id: id)
     end
   end
 end

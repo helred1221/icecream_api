@@ -8,7 +8,7 @@ class CategoryFilter
     end
 
     def find_by_id(id)
-      Category.find(id)
+      Category.find_by(id: id)
     end
   end
 end

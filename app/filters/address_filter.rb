@@ -8,7 +8,7 @@ class AddressFilter
     end
 
     def find_by_id(id)
-      Address.find(id)
+      Address.find_by(id: id)
     end
   end
 end

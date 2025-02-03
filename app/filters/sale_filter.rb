@@ -8,7 +8,7 @@ class SaleFilter
     end
 
     def find_by_id(id)
-      Sale.find(id)
+      Sale.find_by(id: id)
     end
   end
 end
