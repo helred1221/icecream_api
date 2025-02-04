@@ -2,6 +2,9 @@
 
 # Rate Model Class
 class Rate < ApplicationRecord
-  has_many :user_rate_product
-  has_many :sale_products
+  belongs_to :user
+  belongs_to :product
+
+  validates :star, presence: true, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 5 }
+  validates :comment, presence: true
 end
