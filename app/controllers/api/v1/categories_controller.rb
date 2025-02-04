@@ -18,7 +18,7 @@ module Api
       def create
         category = Category.new(category_params)
 
-        if category.save
+        if CategoryService.save(category)
           render json: category, status: :created
         else
           render json: { errors: category.errors.full_messages }, status: :unprocessable_entity
@@ -26,28 +26,27 @@ module Api
       end
 
       def update
-        if @category.update(category_params)
+        if CategoryService.update(@category, category_params)
           render json: @category, status: :ok
         else
-          render json: { errors: category.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: @category.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        @category.destroy
+        CategoryService.destroy(@category)
         head :no_content
       end
 
       private
 
       def category_params
-        params
-          .require(:category)
-          .permit(:title, :description)
+        params.require(:category).permit(:title, :description)
       end
 
       def set_category
-        @category = CategoryFilter.find_by_id(params[:id])
+        @category = CategoryFilter.find_by_id(id: params[:id])
+        render json: { errors: 'Category not found' }, status: :not_found unless @category
       end
     end
   end

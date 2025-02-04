@@ -41,9 +41,14 @@ module Api
       private
 
       def user_params
-        params
-          .require(:user)
-          .permit(:name, :gender, :email, :password, :role, :address)
+        params.require(:user).permit(
+          :name,
+          :gender,
+          :email,
+          :password,
+          :role,
+          addressess_attributes: %i[id street house_number neighborhood city zip_code _destroy]
+        )
       end
 
       def set_user
