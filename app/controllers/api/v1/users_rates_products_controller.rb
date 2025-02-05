@@ -7,7 +7,7 @@ module Api
       before_action :set_user_rate_products, only: %i[show update destroy]
 
       def index
-        user_rate_products = UsersRatesProductsFilter.retrieve_all
+        user_rate_products = UserRateProductFilter.retrieve_all
         render json: user_rate_products, status: :ok
       end
 
@@ -18,7 +18,7 @@ module Api
       def create
         user_rate_products = UsersRatesProducts.new(user_rate_products_params)
 
-        if user_rate_products.save
+        if UsersRatesProductsService.save(user_rate_products)
           render json: user_rate_products, status: :created
         else
           render json: { errors: user_rate_products.errors.full_messages }, status: :unprocessable_entity
@@ -26,28 +26,27 @@ module Api
       end
 
       def update
-        if @user_rate_products.update(user_rate_products_params)
+        if UsersRatesProductsService.update(@user_rate_products, user_rate_products_params)
           render json: @user_rate_products, status: :ok
         else
-          render json: { errors: user_rate_products.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: user_rate_products.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        @user_rate_products.destroy
+        UsersRatesProductsService.destroy(@user_rate_products)
         head :no_content
       end
 
       private
 
       def user_rate_products_params
-        params
-          .require(:user_rate_products)
-          .permit(:user, :product, :rate)
+        params.require(:user_rate_products).permit(:user, :product, :rate)
       end
 
       def set_user_rate_products
-        @user_rate_products = UserFilter.find_by_id(params[:id])
+        @user_rate_products = UserRateProductFilter.find_by_id(id: params[:id])
+        render json: { errors: 'Rated Product by User not found' }, status: :not_found unless @user_rate_products
       end
     end
   end
