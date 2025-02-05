@@ -4,5 +4,5 @@
 class Address < ApplicationRecord
   belongs_to :user
 
-  validates :street, :house_number, :neighborhood, :city, :zip_code, presence: true
+  validates :street, :number, :neighborhood, :city, :zip_code, presence: true
 end
