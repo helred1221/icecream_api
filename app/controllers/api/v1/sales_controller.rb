@@ -41,7 +41,7 @@ module Api
       private
 
       def sale_params
-        params.require(:sale).permit(:sale_date, :user)
+        params.require(:sale).permit(:amount, :sale_date, :user_id, sale_products_attributes: %i[product_id quantity rated])
       end
 
       def set_sale

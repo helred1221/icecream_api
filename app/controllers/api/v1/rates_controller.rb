@@ -41,7 +41,7 @@ module Api
       private
 
       def rate_params
-        params.require(:rate).permit(:star, :comment)
+        params.require(:rate).permit(:star, :comment, :product_id, :user_id)
       end
 
       def set_rate
