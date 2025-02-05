@@ -47,7 +47,7 @@ module Api
           :email,
           :password,
           :role,
-          addresses_attributes: %i[id street house_number neighborhood city zip_code _destroy]
+          addresses_attributes: %i[id street number neighborhood city zip_code _destroy]
         )
       end
 
