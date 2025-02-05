@@ -18,7 +18,7 @@ module Api
       def create
         rate = Rate.new(rate_params)
 
-        if rate.save
+        if RateService.save(rate)
           render json: rate, status: :created
         else
           render json: { errors: rate.errors.full_messages }, status: :unprocessable_entity
@@ -26,28 +26,27 @@ module Api
       end
 
       def update
-        if @rate.update(rate_params)
+        if RateService.update(@rate, rate_params)
           render json: @rate, status: :ok
         else
-          render json: { errors: rate.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: @rate.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        @rate.destroy
+        RateService.destroy(@rate)
         head :no_content
       end
 
       private
 
       def rate_params
-        params
-          .require(:rate)
-          .permit(:star, :comment)
+        params.require(:rate).permit(:star, :comment)
       end
 
       def set_rate
-        @rate = RateFilter.find_by_id(params[:id])
+        @rate = RateFilter.find_by_id(id: params[:id])
+        render json: { errors: 'Rate not found' }, status: :not_found unless @rate
       end
     end
   end

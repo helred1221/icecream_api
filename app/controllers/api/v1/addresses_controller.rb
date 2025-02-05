@@ -29,7 +29,7 @@ module Api
         if AddressService.update(@address, address_params)
           render json: @address, status: :ok
         else
-          render json: { errors: @address.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: @address.errors.full_messages }, status: :unprocessable_entity
         end
       end
 

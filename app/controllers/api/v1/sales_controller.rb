@@ -18,7 +18,7 @@ module Api
       def create
         sale = Sale.new(sale_params)
 
-        if sale.save
+        if SaleService.save(sale)
           render json: sale, status: :created
         else
           render json: { errors: sale.errors.full_messages }, status: :unprocessable_entity
@@ -26,28 +26,27 @@ module Api
       end
 
       def update
-        if @sale.update(sale_params)
+        if SaleService.update(@sale, sale_params)
           render json: @sale, status: :ok
         else
-          render json: { errors: sale.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: @sale.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        @sale.destroy
+        SaleService.destroy(@sale)
         head :no_content
       end
 
       private
 
       def sale_params
-        params
-          .require(:sale)
-          .permit(:sale_date, :user)
+        params.require(:sale).permit(:sale_date, :user)
       end
 
       def set_sale
-        @sale = SaleFilter.find_by_id(params[:id])
+        @sale = SaleFilter.find_by_id(id: params[:id])
+        render json: { errors: 'Sale not found' }, status: :not_found unless @sale
       end
     end
   end
