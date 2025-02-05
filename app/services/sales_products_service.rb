@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Sale Products Service Class
-class SaleProductsService
+class SaleProductService
   class << self
     def save(sale_product)
       sale_product.save

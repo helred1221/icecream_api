@@ -18,7 +18,7 @@ module Api
       def create
         sale_products = SaleProduct.new(sales_products_params)
 
-        if sale_products.save
+        if SaleProductService.save(sale_products)
           render json: sale_products, status: :created
         else
           render json: { errors: sale_products.errors.full_messages }, status: :unprocessable_entity
@@ -26,28 +26,27 @@ module Api
       end
 
       def update
-        if @sale_products.update(sales_products_params)
+        if SaleProductService.update(@sale_products, sales_products_params)
           render json: @sale_products, status: :ok
         else
-          render json: { errors: sale_products.errors.full_message }, status: :unprocessable_entity
+          render json: { errors: sale_products.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        @sale_products.destroy
+        SaleProductService.destroy(@sale_products)
         head :no_content
       end
 
       private
 
       def sales_products_params
-        params
-          .require(:sale_products)
-          .permit(:rate, :quantity, :sale, :product)
+        params.require(:sale_products).permit(:rate, :quantity, :sale, :product)
       end
 
       def set_sales_products
-        @sale_products = SaleFilter.find_by_id(params[:id])
+        @sale_products = SaleProductFilter.find_by_id(id: params[:id])
+        render json: { errors: 'Product in Sale not found' }, status: :not_found unless @sale_products
       end
     end
   end
