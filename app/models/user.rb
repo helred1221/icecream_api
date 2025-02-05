@@ -9,5 +9,5 @@ class User < ApplicationRecord
   validates :name, :email, :password, :role, presence: true
   validates :email, uniqueness: true
 
-  accepts_nested_attributes_for :address, allow_destroy: true
+  accepts_nested_attributes_for :addresses, allow_destroy: true
 end
